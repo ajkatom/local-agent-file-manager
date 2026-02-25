@@ -1,0 +1,28 @@
+{
+  "name": "local-agent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init": "node src/cli.js init",
+    "index": "node src/cli.js index",
+    "chat": "node src/cli.js chat",
+    "search": "node src/cli.js search"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "better-sqlite3": "^12.6.2",
+    "dotenv": "^17.3.1",
+    "exceljs": "^4.4.0",
+    "execa": "^9.6.1",
+    "fast-glob": "^3.3.3",
+    "mailparser": "^3.9.3",
+    "mammoth": "^1.11.0",
+    "pdf-parse": "^2.4.5",
+    "sharp": "^0.34.5",
+    "tesseract.js": "^7.0.0"
+  }
+}
