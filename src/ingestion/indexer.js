@@ -1,8 +1,5 @@
 // src/ingestion/indexer.js
 import fs from "fs";
-import path from "path";
-import crypto from "crypto";
-
 import { scanFiles } from "./scanner.js";
 import { loadFileToText } from "./loader.js";
 import { chunkText } from "./chunker.js";
@@ -10,22 +7,6 @@ import { chunkText } from "./chunker.js";
 function floatsToBuffer(arr) {
   const f32 = new Float32Array(arr);
   return Buffer.from(f32.buffer);
-}
-
-function sha256File(filePath) {
-  const hash = crypto.createHash("sha256");
-  const fd = fs.openSync(filePath, "r");
-  try {
-    const bufSize = 1024 * 1024;
-    const buf = Buffer.allocUnsafe(bufSize);
-    let bytesRead = 0;
-    while ((bytesRead = fs.readSync(fd, buf, 0, bufSize, null)) > 0) {
-      hash.update(buf.subarray(0, bytesRead));
-    }
-  } finally {
-    fs.closeSync(fd);
-  }
-  return hash.digest("hex");
 }
 
 export async function indexFolder({ rootPath, repos, embedClient }) {
@@ -71,8 +52,6 @@ export async function indexFolder({ rootPath, repos, embedClient }) {
         });
       }
 
-      // (Optional) you can store file_index info here later
-      // const hash = sha256File(absPath);
 
       indexed++;
       if (indexed % 10 === 0) console.log(`Indexed ${indexed} files...`);

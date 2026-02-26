@@ -19,10 +19,6 @@ async function runChat(container) {
     prompt: "> "
   });
 
-  function nowIso() {
-    return new Date().toISOString();
-  }
-
   console.log("Local chat ready (type 'exit' to quit).");
   rl.prompt();
 
