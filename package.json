@@ -7,7 +7,8 @@
     "init": "node src/cli.js init",
     "index": "node src/cli.js index",
     "chat": "node src/cli.js chat",
-    "search": "node src/cli.js search"
+    "search": "node src/cli.js search",
+    "test": "node --test"
   },
   "keywords": [],
   "author": "",
