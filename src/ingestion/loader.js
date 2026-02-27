@@ -13,8 +13,14 @@ import { ocrImage } from "./ocr.js";
 
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
-const pdfPkg = require("pdf-parse");
-const pdf = pdfPkg.default || pdfPkg;
+const pdfMod = require("pdf-parse");
+//const pdfPkg = require("pdf-parse");
+const pdf = typeof pdfMod === "function"
+  ? pdfMod
+  : (typeof pdfMod?.default === "function" ? pdfMod.default : null);
+if (!pdf) {
+  throw new Error("pdf-parse did not load a callable function. Check pdf-parse version/import.");
+}
 async function loadText(filePath) {
   return fs.readFileSync(filePath, "utf8");
 }
@@ -22,7 +28,7 @@ async function loadText(filePath) {
 async function loadPdf(filePath) {
   const data = fs.readFileSync(filePath);
   const out = await pdf(data);
-  return out.text || "";
+  return out?.text || "";
 }
 
 async function loadDocx(filePath) {

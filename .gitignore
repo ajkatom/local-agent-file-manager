@@ -3,3 +3,6 @@ data/
 node_modules/
 *.sqlite
 *.ndjson
+# OCR artifacts / language data
+*.traineddata
+tessdata/
